@@ -1,1 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoulPost | Emotional Infrastructure</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="grain-overlay"></div> <nav>
+        <div class="logo">SoulPost</div>
+        <ul>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#vision">Our Vision</a></li>
+            <button class="btn-primary">Start Writing</button>
+        </ul>
+    </nav>
 
+    <header class="hero">
+        <div class="badge">ESTB. 2024</div>
+        <h1>Turn your thoughts into <br><span class="highlight">physical reality.</span></h1>
+        <p class="sub-hero">We print, seal, and post your words so you can focus on the feeling. Private. Permanent. Personal.</p>
+    </header>
+
+    <section id="services" class="container">
+        <div class="section-header">
+            <span class="step-no">01</span>
+            <h2>Choose your medium</h2>
+        </div>
+        <div class="card-grid">
+            <div class="card active" onclick="selectService('letter')">
+                <div class="card-icon">✉</div>
+                <h3>Letter-as-a-Service</h3>
+                <p>Love, apologies, or closure. Hand-sealed and posted via physical mail.</p>
+            </div>
+            <div class="card" onclick="selectService('invitation')">
+                <div class="card-icon">⚜</div>
+                <h3>Event Invitations</h3>
+                <p>Bulk delivery for weddings and ceremonies. Each guest addressed personally.</p>
+            </div>
+            <div class="card" onclick="selectService('publish')">
+                <h3>Thinker’s Press</h3>
+                <div class="card-icon">📖</div>
+                <p>Print-on-demand for your manuscripts. Preserve ideas physically.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="configurator container">
+        <div class="editor-box"><div class="intent-selector">
+    <p>What is the weight of these words?</p>
+
+    <div class="chips">
+        <button onclick="setIntent('gratitude')">Gratitude</button>
+        <button onclick="setIntent('apology')">Apology</button>
+        <button onclick="setIntent('closure')">Closure</button>
+        <button onclick="setIntent('celebration')">Celebration</button>
+    </div>
+</div><div class="preview-container">
+    <h3>The Physical Proof</h3>
+    <div id="letterPreview" class="paper-sheet">
+        <p id="previewText">Your message will appear here in elegant script...</p>
+    </div>
+</div>
+
+
+<div class="input-group">
+    <label>Schedule Dispatch Date</label>
+    <input type="date" id="dispatchDate" min="2026-03-14">
+</div>
+
+            <div class="wax-seal-decor"></div>
+            <h3>Draft your message</h3>
+            <p class="hintText">Use our AI assistant to help find the right words...</p>
+            <textarea id="letterContent" placeholder="Dearest..."></textarea>
+            
+            <div class="options-grid">
+                <div class="input-group">
+                    <label>Paper Texture</label>
+                    <select id="paperType">
+                        <option value="standard">Standard Vellum</option>
+                        <option value="scented">Scented Premium (+₹50)</option>
+                        <option value="handmade">Handmade Recycled (+₹80)</option>
+                    </select>
+                </div>
+ <div class="input-group">
+    <button id="recordVoice" class="btn-secondary" onclick="startVoiceRecord()">🎙️ Speak your heart</button>
+</div>
+
+<div class="input-group">
+    <label>Schedule Delivery</label>
+    <input type="date" id="deliveryDate">
+</div>
+
+            <button class="btn-send" onclick="processOrder()">
+                <span>Seal & Send Physically</span>
+            </button>
+            <p class="privacy-note">🔒 Encrypted transmission. Destroyed after printing.</p>
+        </div>
+    </section><main class="dashboard">
+    <section class="editor-panel">
+        <div class="stepper">
+            <span class="active">1. Composition</span> <span>2. Sensory Selection</span> <span>3. Finalize</span>
+        </div>
+        <textarea id="letterContent" placeholder="Pour your thoughts here..."></textarea>
+        
+        <div class="signature-upload">
+            <label for="sigUpload">Upload Handwritten Signature</label>
+            <input type="file" id="sigUpload" accept="image/*">
+            <div id="sigPreview" class="sig-box"></div>
+        </div>
+    </section>
+
+    <section class="preview-panel">
+        <div class="paper-canvas" id="canvas">
+            <div class="paper-header">SoulPost Ateliers</div>
+            <div id="displayArea" class="content-text"></div>
+            <div id="sigOverlay" class="signature-display"></div>
+            <div class="paper-footer">Ref. #SP-2026-9901</div>
+        </div>
+    </section>
+</main>
+
+
+    <script src="script.js"></script>
+</body>
+  </html>
