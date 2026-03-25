@@ -423,3 +423,19 @@ h2 {
     text-decoration: underline;
 }
 
+/* This ensures the About section stays in its own row and doesn't mess up the others */
+.about-teaser {
+    clear: both; 
+    display: block;
+    width: 100%;
+    margin: 20px 0;
+    padding: 20px;
+    overflow: hidden; /* This forces the box to contain its children */
+}
+
+/* If you are using a grid or flexbox, add this to the parent container */
+.main-container-class {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
