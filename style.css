@@ -442,3 +442,14 @@ h2 {
     flex-wrap: wrap;
     align-items: flex-start;
 }
+/* This ONLY triggers on your login page now */
+.login-page-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    background-color: #f0f2f5; /* Light grey for the login background */
+}
+
+/* IMPORTANT: Remove the old 'body' flex styles that were here before */
