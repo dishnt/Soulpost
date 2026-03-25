@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Sign Up</title>
+    <link rel="stylesheet" href="login-style.css">
+</head>
+<body>
+
+<div class="auth-container">
+    <div id="login-form">
+        <h2>Login</h2>
+        <form>
+            <div class="input-group">
+                <label>Email or Username</label>
+                <input type="text" placeholder="Enter your email" required>
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" placeholder="Enter password" required>
+            </div>
+            <button type="submit" class="auth-btn">Login</button>
+        </form>
+        <p class="toggle-text">Don't have an account? <a href="#" onclick="toggleAuth()">Create one</a></p>
+    </div>
+
+    <div id="signup-form" style="display: none;">
+        <h2>Create Account</h2>
+        <form>
+            <div class="input-group">
+                <label>Full Name</label>
+                <input type="text" placeholder="Your Name" required>
+            </div>
+            <div class="input-group">
+                <label>Email</label>
+                <input type="email" placeholder="email@example.com" required>
+            </div>
+            <div class="input-group">
+                <label>New Password</label>
+                <input type="password" placeholder="Min. 8 characters" required>
+            </div>
+            <button type="submit" class="auth-btn">Sign Up</button>
+        </form>
+        <p class="toggle-text">Already have an account? <a href="#" onclick="toggleAuth()">Login here</a></p>
+    </div>
+</div>
+
+<script>
+    function toggleAuth() {
+        const login = document.getElementById('login-form');
+        const signup = document.getElementById('signup-form');
+        if (login.style.display === "none") {
+            login.style.display = "block";
+            signup.style.display = "none";
+        } else {
+            login.style.display = "none";
+            signup.style.display = "block";
+        }
+    }
+</script>
+
+</body>
+</html>
