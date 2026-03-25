@@ -85,7 +85,18 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
-const Auth = firebase.auth();
+const Auth = firebase.auth();function signUpUser(email, password) {
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        // Signed in 
+        alert("Account Created Successfully!");
+        window.location.href = "index.html"; // Send them to your home page
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+}
+
     </script>
 
 
