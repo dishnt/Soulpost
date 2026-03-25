@@ -309,10 +309,15 @@ select, input {
     justify-content: center;
 }
 .about-teaser {
+    grid-column: 1 / -1; /* This forces it to take up the FULL width of the grid */
     text-align: center;
-    padding: 50px 20px;
-    background-color: #f9f9f9;
+    padding: 80px 20px;
+    background-color: white;
+    border: 1px solid #eee;
+    margin: 40px 10%; /* Matches your nav padding */
+    box-shadow: var(--soft-shadow);
 }
+
 
 .cta-button {
     display: inline-block;
@@ -339,13 +344,11 @@ select, input {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Keep the background, but remove the flex positioning */
 body {
-    background-color: #f0f2f5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    background-color: var(--cream);
 }
+
 
 .auth-container {
     background: #ffffff;
