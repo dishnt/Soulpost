@@ -33,7 +33,40 @@
   }
     </style>
 </head> 
-<body>
+<body><div class="artistic-bg-element"></div>
+
+<style>
+.artistic-bg-element {
+    position: fixed;
+    top: 10%;
+    right: -5%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(197,160,89,0.05) 0%, rgba(24bf9f6,0) 70%);
+    z-index: -1;
+    animation: float 20s infinite alternate;
+}
+
+@keyframes float {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    100% { transform: translate(-100px, 50px) rotate(10deg); }
+}
+</style>
+
+<nav>
+    <div class="logo" style="font-size: 1.8rem; letter-spacing: 5px;">SOULPOST</div>
+    <div class="nav-links">
+        <a href="about.html" class="nav-item">Our Idea</a>
+        <a href="login.html" class="nav-item" id="login-link">Sign In</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="badge">Est. 2026</div>
+    <h1>Preserving the <span class="highlight">Art of Thought.</span></h1>
+    <p class="sub-hero">A sanctuary for digital words to find their physical weight.</p>
+</section>
+
     <div class="grain-overlay"></div> <nav>
     <div class="logo">SoulPost</div>
     
