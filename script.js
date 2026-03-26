@@ -1,112 +1,99 @@
-function selectService(service) {
+/**
+ * SoulPost Interactive Logic
+ * Handles: Service selection, Intent presets, Live Preview, and Order Processing
+ */
+
+// 1. Live Text Sync: Updates the paper canvas as the user types
+const textarea = document.getElementById('letterContent');
+const displayArea = document.getElementById('displayArea');
+
+if (textarea && displayArea) {
+    textarea.addEventListener('input', (e) => {
+        displayArea.innerText = e.target.value || "Your words will appear here in elegant script...";
+    });
+}
+
+// 2. Intent Presets: Sets the starting text based on emotional tone
+function setIntent(intent) {
+    const presets = {
+        gratitude: "Dearest, I've been reflecting on our time together and simply wanted to say how much I appreciate...",
+        apology: "I am writing this because I value our relationship more than my pride. Please accept this sincere...",
+        closure: "It is time to turn this page. I wish you nothing but the best as we move forward...",
+        celebration: "My heart is full as I think about this wonderful milestone. Cheers to you on this..."
+    };
+
+    if (textarea && presets[intent]) {
+        textarea.value = presets[intent];
+        // Trigger the input event manually to update the preview canvas
+        textarea.dispatchEvent(new Event('input'));
+        
+        // Visual feedback for the editor
+        const editorBox = document.querySelector('.editor-box');
+        editorBox.style.borderColor = "#c5a059"; 
+        setTimeout(() => editorBox.style.borderColor = "#ddd", 1000);
+    }
+}
+
+// 3. Service Selection: Highlights the chosen medium
+function selectService(serviceType) {
     const cards = document.querySelectorAll('.card');
     cards.forEach(card => {
         card.style.opacity = '0.5';
         card.classList.remove('active');
     });
     
-    // Highlight the selected one
-    event.currentTarget.style.opacity = '1';
-    event.currentTarget.classList.add('active');
+    // Find the clicked card via the event
+    const selectedCard = event.currentTarget;
+    selectedCard.style.opacity = '1';
+    selectedCard.classList.add('active');
     
-    console.log(`Phase active: ${service}`);
+    console.log(`Active Service: ${serviceType}`);
 }
 
-// Add a smooth scroll effect
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
-    });
-});
-
+// 4. Order Processing & Seal Animation
 function processOrder() {
     const btn = document.querySelector('.btn-send');
-    btn.innerHTML = "Processing your intention...";
+    const canvas = document.getElementById('canvas');
     
+    if (!textarea.value.trim()) {
+        alert("Please draft your message before sealing.");
+        return;
+    }
+
+    // Phase 1: Processing
+    btn.innerHTML = "Capturing Intention...";
+    btn.disabled = true;
+
+    // Phase 2: The "Physical Seal" Animation
+    if (canvas) {
+        canvas.style.transform = "scale(0.98) rotate(0deg)";
+        canvas.style.boxShadow = "0 0 20px rgba(197, 160, 89, 0.4)";
+    }
+
     setTimeout(() => {
+        // Phase 3: Completion
         btn.innerHTML = "Sealed & Dispatched";
-        btn.style.background = "#27ae60";
+        btn.style.background = "#27ae60"; // Success Green
+        
+        if (canvas) {
+            canvas.style.transform = "rotate(-1deg)";
+            canvas.style.boxShadow = "15px 15px 40px rgba(0,0,0,0.05)";
+        }
+
         alert("Your words have been captured. We are preparing the vellum and ink now.");
     }, 2000);
 }
-// Feature: Voice Transcription Simulation
-function startVoiceRecord() {
-    const btn = document.getElementById('recordVoice');
-    btn.innerText = "Listening...";
-    btn.style.background = "#d35400";
-    
-    // Logic: In a real app, integrate the Web Speech API
-    setTimeout(() => {
-        document.getElementById('letterContent').value = "Dearest, I wanted to say that my life is richer because you are in it. Time may pass, but these words remain.";
-        btn.innerText = "Transcript Ready";
-    }, 3000);
-}
-function setIntent(intent) {
-    const textarea = document.getElementById('letterContent');
-    const presets = {
-        gratitude: "Dear [Name], I've been reflecting on our time together and simply wanted to say...",
-        apology: "Dear [Name], I am writing this because I value our relationship more than my pride...",
-        closure: "Dear [Name], it is time to turn this page. I wish you nothing but the best...",
-        celebration: "Dear [Name], my heart is full as I think about this wonderful milestone..."
-    };
 
-    textarea.value = presets[intent];
-    
-    // Aesthetic feedback
-    document.querySelector('.editor-box').style.borderColor = "var(--gold)";
-    console.log(`Setting emotional tone to: ${intent}`);
-}
-const textarea = document.getElementById('letterContent');
-const previewText = document.getElementById('previewText');
-
-textarea.addEventListener('input', (e) => {
-    previewText.innerText = e.target.value || "Your message will appear here...";
+// 5. Smooth Scroll for Navigation
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
 });
 
-// Animate the "Seal" process
-function triggerSealAnimation() {
-    const preview = document.getElementById('letterPreview');
-    preview.style.transform = "rotate(2deg) scale(0.95)";
-    setTimeout(() => {
-        preview.style.transform = "rotate(0deg) scale(1)";
-        alert("Physical Seal Applied: Your intent is now secured.");
-    }, 500);
-}
-// Signature Processing
-document.getElementById('sigUpload').addEventListener('change', function(e) {
-    const reader = new FileReader();
-    reader.onload = function(event) {
-        const img = document.createElement('img');
-        img.src = event.target.result;
-        img.style.maxWidth = '150px';
-        const sigPreview = document.getElementById('sigOverlay');
-        sigPreview.innerHTML = '';
-        sigPreview.appendChild(img);
-    }
-    reader.readAsDataURL(e.target.files[0]);
-});
-
-// Real-time Text Sync
-document.getElementById('letterContent').addEventListener('input', (e) => {
-    document.getElementById('displayArea').innerText = e.target.value;
-});
-
-// State Machine for Order Lifecycle
-const OrderState = {
-    DRAFTING: 'Drafting',
-    PRINTING: 'Printing',
-    SEALING: 'Manual Wax Sealing',
-    TRANSIT: 'In Courier Transit',
-    DELIVERED: 'Delivered'
-};
-
-function trackOrder(orderId) {
-    console.log(`Tracking ID: ${orderId}`);
-    // This would fetch from your database
-    return OrderState.SEALING;
-}
 
 
